@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /customer/
+Disallow: /ajax/
+
+Sitemap: https://dmagancy.com/sitemap.xml

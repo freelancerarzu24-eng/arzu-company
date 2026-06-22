@@ -1,0 +1,157 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.bg-dark {
+    background-color: #1a1a1a !important;
+}
+
+/* WhatsApp Float */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25d366;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.whatsapp-float:hover {
+    color: #FFF;
+    background-color: #128c7e;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../img/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.section-title h2 {
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #007bff;
+    bottom: 0;
+    left: calc(50% - 25px);
+}
+
+/* Footer Social Links */
+.social-links a {
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #007bff !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        padding: 100px 0;
+    }
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .card {
+        margin-bottom: 20px;
+    }
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    .cta-buttons .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0 !important;
+    }
+}
+
+/* UI/UX Polish */
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
