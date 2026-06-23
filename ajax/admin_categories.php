@@ -6,6 +6,10 @@ if (!is_admin_logged_in()) {
     die("Unauthorized");
 }
 
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+    die("CSRF token validation failed");
+}
+
 $action = $_POST['action'] ?? '';
 
 if ($action == 'add') {

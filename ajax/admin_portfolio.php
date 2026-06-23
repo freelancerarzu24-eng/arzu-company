@@ -6,16 +6,20 @@ if (!is_admin_logged_in()) {
     die("Unauthorized");
 }
 
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+    die("CSRF token validation failed");
+}
+
 $action = $_POST['action'] ?? '';
 
 if ($action == 'add') {
     $title = $_POST['title'];
-    $live_url = $_POST['live_url'];
-    $github_url = $_POST['github_url'];
-    $tech_stack = $_POST['tech_stack'];
-    $description = $_POST['description'];
+    $live = $_POST['live_url'];
+    $github = $_POST['github_url'];
+    $tech = $_POST['tech_stack'];
+    $desc = $_POST['description'];
 
-    $images = [];
+    $uploaded_images = [];
     if (!empty($_FILES['images']['name'][0])) {
         foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
             $file = [
@@ -24,16 +28,14 @@ if ($action == 'add') {
                 'size' => $_FILES['images']['size'][$key],
                 'error' => $_FILES['images']['error'][$key]
             ];
-            $uploaded_image = upload_image($file, '../uploads/');
-            if ($uploaded_image) {
-                $images[] = $uploaded_image;
-            }
+            $img = upload_image($file, '../uploads/');
+            if ($img) $uploaded_images[] = $img;
         }
     }
-    $images_json = json_encode($images);
+    $images_json = json_encode($uploaded_images);
 
     $stmt = $pdo->prepare("INSERT INTO portfolios (title, images, live_url, github_url, tech_stack, description) VALUES (?, ?, ?, ?, ?, ?)");
-    if ($stmt->execute([$title, $images_json, $live_url, $github_url, $tech_stack, $description])) {
+    if ($stmt->execute([$title, $images_json, $live, $github, $tech, $desc])) {
         echo "Portfolio project added successfully!";
     } else {
         echo "Error adding project.";

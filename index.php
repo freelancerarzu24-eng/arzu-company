@@ -14,11 +14,16 @@ $home_seo = $seo_stmt->fetch();
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-7">
-                <h1 class="display-4 fw-bold mb-4">Crafting High-Performance Websites for Your Success</h1>
-                <p class="lead mb-4">Professional Freelance Web Development services including Custom Web Applications, E-commerce, and SEO optimization.</p>
+                <h1 class="display-4 fw-bold mb-4 text-gradient">Crafting Next-Gen Digital Experiences</h1>
+                <p class="lead mb-4 text-muted">Bespoke web architecture, seamless user interfaces, and high-performance backend systems. Your vision, engineered to perfection.</p>
                 <div class="cta-buttons">
-                    <a href="services.php" class="btn btn-primary btn-lg me-3">Explore Services</a>
-                    <a href="portfolio.php" class="btn btn-outline-light btn-lg">View Portfolio</a>
+                    <a href="services.php" class="btn btn-primary btn-lg me-3">Get Started</a>
+                    <a href="portfolio.php" class="btn btn-outline-light btn-lg">View Projects</a>
+                </div>
+            </div>
+            <div class="col-md-5 d-none d-md-block">
+                <div class="bg-glass p-5 text-center">
+                    <img src="assets/img/hero-ai.png" alt="AI Development" class="img-fluid floating-animation" style="max-height: 300px;">
                 </div>
             </div>
         </div>
@@ -26,11 +31,11 @@ $home_seo = $seo_stmt->fetch();
 </header>
 
 <!-- Featured Services -->
-<section class="services-section bg-white">
+<section class="services-section">
     <div class="container">
         <div class="section-title text-center mb-5">
-            <h2>Our Featured Services</h2>
-            <p>Quality solutions tailored to your business needs.</p>
+            <h2 class="text-gradient">Premium Services</h2>
+            <p class="text-muted">Explore our professional-grade web solutions designed for the modern era.</p>
         </div>
         <div class="row">
             <?php
@@ -127,10 +132,10 @@ $home_seo = $seo_stmt->fetch();
 </section>
 
 <!-- Testimonials -->
-<section class="reviews-section bg-white">
+<section class="reviews-section">
     <div class="container">
         <div class="section-title text-center">
-            <h2>What My Clients Say</h2>
+            <h2 class="text-gradient">Client Success Stories</h2>
         </div>
         <div class="row">
             <?php
@@ -138,18 +143,18 @@ $home_seo = $seo_stmt->fetch();
             while($review = $review_stmt->fetch()):
             ?>
             <div class="col-md-4 mb-4">
-                <div class="card p-4">
+                <div class="card p-4 h-100 bg-glass">
                     <div class="mb-3 text-warning">
                         <?php for($i=1; $i<=5; $i++): ?>
                             <i class="fas fa-star<?php echo $i <= $review['rating'] ? '' : '-half-alt'; ?>"></i>
                         <?php endfor; ?>
                     </div>
-                    <p class="mb-4">"<?php echo $review['comment']; ?>"</p>
-                    <div class="d-flex align-items-center">
-                        <img src="uploads/<?php echo $review['client_image'] ?: 'default-user.png'; ?>" class="rounded-circle me-3" width="50" height="50">
+                    <p class="mb-4 text-muted">"<?php echo e($review['comment']); ?>"</p>
+                    <div class="d-flex align-items-center mt-auto">
+                        <img src="uploads/<?php echo $review['client_image'] ?: 'default-user.png'; ?>" class="rounded-circle me-3 border border-primary" width="50" height="50">
                         <div>
-                            <h6 class="mb-0"><?php echo $review['client_name']; ?></h6>
-                            <small class="text-muted">Client</small>
+                            <h6 class="mb-0"><?php echo e($review['client_name']); ?></h6>
+                            <small class="text-muted">Verified Client</small>
                         </div>
                     </div>
                 </div>

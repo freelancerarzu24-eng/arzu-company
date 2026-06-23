@@ -6,10 +6,14 @@ if (!is_admin_logged_in()) {
     die("Unauthorized");
 }
 
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+    die("CSRF token validation failed");
+}
+
 $action = $_POST['action'] ?? '';
 
 if ($action == 'add') {
-    $client_name = $_POST['client_name'];
+    $name = $_POST['client_name'];
     $rating = $_POST['rating'];
     $comment = $_POST['comment'];
 
@@ -18,8 +22,8 @@ if ($action == 'add') {
         $image = upload_image($_FILES['image'], '../uploads/');
     }
 
-    $stmt = $pdo->prepare("INSERT INTO reviews (client_name, client_image, rating, comment) VALUES (?, ?, ?, ?)");
-    if ($stmt->execute([$client_name, $image, $rating, $comment])) {
+    $stmt = $pdo->prepare("INSERT INTO reviews (client_name, client_image, rating, comment, status) VALUES (?, ?, ?, ?, 1)");
+    if ($stmt->execute([$name, $image, $rating, $comment])) {
         echo "Review added successfully!";
     } else {
         echo "Error adding review.";

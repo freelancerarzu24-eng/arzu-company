@@ -6,6 +6,10 @@ if (!is_admin_logged_in()) {
     die("Unauthorized");
 }
 
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+    die("CSRF token validation failed");
+}
+
 $action = $_POST['action'] ?? '';
 
 if ($action == 'add') {
@@ -23,9 +27,9 @@ if ($action == 'add') {
 
     $stmt = $pdo->prepare("INSERT INTO blogs (title, slug, featured_image, content, category, meta_title, meta_description) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if ($stmt->execute([$title, $slug, $image, $content, $category, $meta_title, $meta_description])) {
-        echo "Blog post added successfully!";
+        echo "Blog post published successfully!";
     } else {
-        echo "Error adding blog post.";
+        echo "Error publishing blog.";
     }
 }
 
@@ -35,7 +39,7 @@ if ($action == 'delete') {
     if ($stmt->execute([$id])) {
         echo "Blog post deleted successfully!";
     } else {
-        echo "Error deleting blog post.";
+        echo "Error deleting blog.";
     }
 }
 ?>

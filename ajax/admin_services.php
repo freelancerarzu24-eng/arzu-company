@@ -6,6 +6,10 @@ if (!is_admin_logged_in()) {
     die("Unauthorized");
 }
 
+if (!verify_csrf_token($_POST['csrf_token'] ?? '')) {
+    die("CSRF token validation failed");
+}
+
 $action = $_POST['action'] ?? '';
 
 if ($action == 'add') {
@@ -19,11 +23,9 @@ if ($action == 'add') {
     $premium_price = $_POST['premium_price'] ?: null;
     $status = $_POST['status'];
     $featured = $_POST['featured'];
-    $meta_title = $_POST['meta_title'];
-    $meta_description = $_POST['meta_description'];
 
-    $stmt = $pdo->prepare("INSERT INTO services (category_id, title, slug, short_description, description, basic_price, standard_price, premium_price, status, featured, meta_title, meta_description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    if ($stmt->execute([$category_id, $title, $slug, $short_description, $description, $basic_price, $standard_price, $premium_price, $status, $featured, $meta_title, $meta_description])) {
+    $stmt = $pdo->prepare("INSERT INTO services (category_id, title, slug, short_description, description, basic_price, standard_price, premium_price, status, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    if ($stmt->execute([$category_id, $title, $slug, $short_description, $description, $basic_price, $standard_price, $premium_price, $status, $featured])) {
         $service_id = $pdo->lastInsertId();
 
         // Handle Image Gallery
